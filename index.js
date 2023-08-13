@@ -15,7 +15,7 @@ const cart = {
     console.log(item);
 
     item.prodName = prodName;
-    item.prodPrice = prodPrice;
+    item.prodPrice = this.increaseCount(prodPrice);
     item.prodAmount = prodAmount;
 
     this.items.push(item);
@@ -27,7 +27,7 @@ const cart = {
 
   calculateItemPrice() { // посчитать общую стоимость товаров
     this.totalPrice = this.items.reduce((acc, curr) =>
-      acc + (curr.prodPrice * curr.prodAmount), 0);
+    acc.prodPrice + (acc.prodPrice * curr.prodAmount), 0);
   },
 
   clear() { // очистить корзину
@@ -45,5 +45,7 @@ cart.add('table', 135, 1);
 cart.add('mobil', 390, 1);
 cart.add('televisor', 180, 1);
 console.log(cart.items);
-cart.print();
+console.log(cart.increaseCount());
+// cart.print();
+console.log(cart.totalPrice);
 console.log(cart.calculateItemPrice());
