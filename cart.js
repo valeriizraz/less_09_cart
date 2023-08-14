@@ -3,11 +3,10 @@
 const cart = {
 
   items: [],
-  totalPrice: 0,
   count: 0,
 
-  getTotalPrice() { // получить общую стоимость товаров
-    return this.totalPrice;
+  get totalPrice() {
+    return this.calculateItemPrice();
   },
 
   add(title, price, amount = 1) { // добавить товар
@@ -15,7 +14,6 @@ const cart = {
 
     this.items.push(item);
     this.increaseCount(amount);
-    this.calculateItemPrice();
   },
 
   increaseCount(num) { // увеличить количество товаров
@@ -23,7 +21,9 @@ const cart = {
   },
 
   calculateItemPrice() { // посчитать общую стоимость товаров
-    this.totalPrice = this.items.reduce((acc, item) => acc += item.price * item.amount, 0);
+    const res = this.items.reduce((acc, item) =>
+      acc += item.price * item.amount, 0);
+    return res;
   },
 
   clear() { // очистить корзину
@@ -36,6 +36,7 @@ const cart = {
     console.log(JSON.stringify(this.items));
     console.log(this.totalPrice);
   },
+
 };
 
 cart.add('table', 3, 1);
